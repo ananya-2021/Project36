@@ -47,6 +47,7 @@ function draw() {
     FeedTime = data.val();
  })
  
+  lastFed = hour();
   //write code to display text lastFed time here
   textSize(20);
   fill("white");
@@ -78,7 +79,6 @@ function feedDog(){
     Food:foodS
   })
  } 
- lastFed = hour();
  database.ref('/').update({
   FeedTime: lastFed
 })
