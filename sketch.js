@@ -42,8 +42,10 @@ function draw() {
   foodObj.display();
 
   //write code to read fedtime value from the database 
-  lastFed=database.ref('FeedTime');
-  lastFed.on("value",fedTime);
+  var feed = database.ref('FeedTime');
+  feed.on("value",function(data){
+    FeedTime = data.val();
+ })
  
   //write code to display text lastFed time here
   textSize(20);
@@ -76,16 +78,17 @@ function feedDog(){
     Food:foodS
   })
  } 
-  
+ lastFed = hour();
+ database.ref('/').update({
+  FeedTime: lastFed
+})
 }
 
 //function to add food in stock
 function addFoods(){
   foodS += 1;
+  database.ref('/').update({
+    Food:foodS
+  })
   foodObj.updateFoodStock(foodS);
-}
-
-function fedTime (data){
-  lastFed = hour();
-
 }
