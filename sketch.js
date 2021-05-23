@@ -44,10 +44,10 @@ function draw() {
   //write code to read fedtime value from the database 
   var feed = database.ref('FeedTime');
   feed.on("value",function(data){
-    FeedTime = data.val();
+    lastFed = data.val();
  })
  
-  lastFed = hour();
+
   //write code to display text lastFed time here
   textSize(20);
   fill("white");
@@ -79,6 +79,7 @@ function feedDog(){
     Food:foodS
   })
  } 
+ lastFed = hour();
  database.ref('/').update({
   FeedTime: lastFed
 })
